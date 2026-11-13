@@ -101,7 +101,7 @@ Show it to me. WAIT for changes, then go.
 ━━ STAGE 5 · BUILD ━━
 One self-contained .html file that works offline: fonts embedded, no CDN, no frameworks.
 Craft:
-- Fixed 1920×1080 stage scaled to any screen; CSS 3D (preserve-3d, perspective, camera rigs)
+- Dynamic aspect ratio first: content on a 1920×1080 safe area, with backgrounds and full-bleed art extending to fill any window shape (no letterbox bars); CSS 3D (preserve-3d, perspective, camera rigs)
   and the Web Animations API for motion; SVG for icons and line drawing.
 - Every slide gets its own composition. The transport plays between chapters; simpler
   moves within a chapter. Arriving and leaving should feel physical: anticipation,

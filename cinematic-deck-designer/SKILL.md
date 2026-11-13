@@ -130,7 +130,7 @@ npm i @fontsource/<family> lucide-static
 Pick typefaces that fit the world, not a house default.
 
 **Craft:**
-- **Stage:** a fixed 1920×1080 stage scaled to any screen by `--k`.
+- **Stage: dynamic aspect ratio first.** The deck fills any window shape (16:9, 16:10, 21:9, 4:3, portrait phones and tablets) with no letterbox bars. Design content on a 1920×1080 safe area scaled by `--k`, but let the world around it adapt: backgrounds, skies, grounds, textures, gradients and full-bleed art extend past the safe area to every edge, and layouts may reflow (columns stack in portrait, side panels move) where the content allows. Where an element can't extend, use an edge-aware fill (continued colour, mirrored or stretched backdrop), never black bars. Recompute on resize, rotation and full screen. Transitions and camera moves must stay seamless at the extended edges, and every view (presenter, speaker-view previews, any shared or viewer copy) uses the same adaptive fit.
 - **Motion:** CSS 3D (preserve-3d, perspective, camera rigs that animate a world container) and the Web Animations API. Use SVG for icons and line drawing.
 - **Composition:** every slide gets its own. The transport plays between chapters, with simpler moves inside a chapter. Arriving and leaving should feel physical: anticipation, overshoot, settle.
 - **Accessibility:** respect `prefers-reduced-motion`. Text must be legible from the back row: at least about 28px at 1080p, with strong contrast.
@@ -168,7 +168,7 @@ Pick typefaces that fit the world, not a house default.
 Run the deck in headless Chrome with Playwright (`channel:'chrome'`, viewport 1920×1080 for frames, 1280×720 for quick checks), using the kit in `reference/tests/kit/`: copy it into the project's `tools/` and run `npm i`; its README lists each tool. Fix what you find before showing the user:
 - **Errors and layout:** zero console or page errors. Every fully built slide sits inside safe margins with no overlaps or text overflow.
 - **Frames:** screenshot every slide, plus 4–6 frames of each transport and signature moment. Review them as contact sheets made with `tests/kit/sheet.py`, and fix anything awkward, empty or flickering. Look at the images yourself, critically.
-- **Swaps and seams:** hold the frame before and after every landing where a moving object is replaced by a copy, and compare them: no change in colour, size or angle. Look for lines in the sky and ground (`seams.js`) on every slide settled and during each arrival and camera move, at several window sizes (`aspect.js`).
+- **Swaps and seams:** hold the frame before and after every landing where a moving object is replaced by a copy, and compare them: no change in colour, size or angle. Look for lines in the sky and ground (`seams.js`) on every slide settled and during each arrival and camera move, at several window sizes (`aspect.js`). Check the dynamic aspect: screenshot every slide at 16:9, 21:9, 4:3 and portrait 9:16, and confirm the background reaches every edge with no bars, gaps or clipped content.
 - **Toolkit:** speaker view, simulated voice cues (`__deck.hear`), editor save and reload, and half and double speed. Run the kit's `hud.js`, `notes.js`, `ed.js`, `sv.js`, `save.js` and `tool.js` against the deck: the shared modules must pass them unchanged. For the speaker view (`sv.js`): every panel combination at a few window sizes, previews refit, the script gliding forward and back, the last slide, and a notes edit surviving a reload and Save.
 - **Measured gates:**
   - frame pacing on every set piece (`perf.js`);
